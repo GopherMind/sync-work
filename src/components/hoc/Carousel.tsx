@@ -29,7 +29,6 @@ const Carousel = ({ children, autoPlay = false, autoSlideInterval = 4000 }: Caro
 
   return (
     <div className="relative w-full overflow-hidden">
-      {/* Track */}
       <div
         className="flex transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -41,7 +40,6 @@ const Carousel = ({ children, autoPlay = false, autoSlideInterval = 4000 }: Caro
         ))}
       </div>
 
-      {/* Prev */}
       <button
         onClick={handlePrev}
         className="absolute left-3 top-1/2 -translate-y-1/2 z-10
@@ -77,7 +75,6 @@ const Carousel = ({ children, autoPlay = false, autoSlideInterval = 4000 }: Caro
         ))}
       </div>
 
-      {/* Progress bar */}
       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-orange-500/10">
         <div
           className="h-full bg-gradient-to-r from-orange-700 to-orange-400 transition-all duration-500"

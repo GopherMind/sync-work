@@ -67,12 +67,9 @@ const BubblesParticles = () => {
         rel="stylesheet"
       />
 
-      <div className="relative w-full overflow-hidden bg-[#0a0a0a] h-[714px]">
+      <div className="relative w-full overflow-hidden  h-[714px]">
 
-        <div
-          className="absolute top-0 left-0 right-0 h-[2px] z-10"
-          style={{ background: "linear-gradient(90deg, transparent 0%, #FF6A00 40%, #FF3D00 60%, transparent 100%)" }}
-        />
+    
 
         <div
           className="absolute inset-0 z-0 pointer-events-none"
