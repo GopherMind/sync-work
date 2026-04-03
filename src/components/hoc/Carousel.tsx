@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { useState, useEffect, useCallback, ReactNode } from "react"
+import { useState, useEffect, useCallback } from "react"
+import type { ReactNode } from "react"
 
 interface CarouselProps {
   children: ReactNode[]

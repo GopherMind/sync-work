@@ -1,5 +1,5 @@
 import { Zap, Shield, Star, Globe, Award, Layers } from 'lucide-react'
-import type { advantagesType } from '../../types/advantages.types'
+import type { advantagesType } from '../../../types/advantagesTypes.ts'
 
 const advantages: advantagesType[] = [
   {

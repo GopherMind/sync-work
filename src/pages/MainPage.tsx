@@ -7,7 +7,7 @@ const MainPage = () => {
     <>
       <Header />
 
-      <div className="relative overflow-hidden bg-[#0a0a0a]">
+      <div className="relative overflow-hidden" style={{ background: "linear-gradient(to bottom, #0a0a0a 0%, #0f0500 100%)" }}>
         <div
           className="absolute inset-0 pointer-events-none z-0"
           style={{
@@ -26,7 +26,18 @@ const MainPage = () => {
         />
 
         <div className="relative z-[1]">
-          <BubblesParticles />
+          <div className="relative">
+            <BubblesParticles />
+
+            <div
+              className="absolute inset-x-0 bottom-0 h-40 pointer-events-none z-[20]"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(15,5,0,0) 0%, rgba(15,5,0,0.36) 45%, rgba(10,10,10,0.92) 90%, rgba(10,10,10,1) 100%)",
+              }}
+            />
+          </div>
+
           <Advantages />
         </div>
       </div>

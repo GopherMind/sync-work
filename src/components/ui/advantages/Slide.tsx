@@ -1,4 +1,4 @@
-import type { advantagesType } from '../../types/advantages.types'
+import type { advantagesType } from '../../../types/advantagesTypes.ts'
 
 interface SlideProps {
   item: advantagesType
@@ -8,17 +8,7 @@ const Slide = ({ item }: SlideProps) => {
   const Icon = item.icon
 
   return (
-    <div className="relative min-h-96 flex flex-col justify-center px-12 pb-14 pt-11 overflow-hidden bg-[#0f0500] isolate">
-    {/* Grid overlay */}
-    <div
-      className="absolute inset-0 z-0 pointer-events-none"
-      style={{
-        backgroundImage:
-          "linear-gradient(rgba(255,106,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,106,0,0.04) 1px, transparent 1px)",
-        backgroundSize: "48px 48px",
-      }}
-    />
-
+    <div className="relative min-h-96 flex flex-col justify-center px-12 pb-14 pt-11 overflow-hidden isolate">
     {/* Glow top-right */}
     <div
       className="absolute -top-24 -right-16 w-96 h-96 rounded-full pointer-events-none z-0

@@ -32,10 +32,10 @@ const BubblesParticles = () => {
         move: {
           enable: true,
           speed: 1.4,
-          direction: "none",
+          direction: undefined,
           random: true,
           straight: false,
-          outModes: { default: "bounce" },
+          outModes: "bounce" as any,
         },
         shadow: { enable: true, color: "#FF6A00", blur: 7 },
         stroke: { width: 1, color: "#FF6A00", opacity: 0.5 },
@@ -71,14 +71,7 @@ const BubblesParticles = () => {
 
     
 
-        <div
-          className="absolute inset-0 z-0 pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,106,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,106,0,0.04) 1px, transparent 1px)",
-            backgroundSize: "48px 48px",
-          }}
-        />
+        
 
         <div
           className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-[70%] h-40 z-0 pointer-events-none"
