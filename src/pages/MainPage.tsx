@@ -1,10 +1,14 @@
 import Header from "../components/layouts/Header"
+import Footer from "../components/layouts/Footer"
 import BubblesParticles from "../components/ui/HeroBaner/HeroBanner"
 import Advantages from "../components/ui/advantages/Advantages"
+import OrdersFeed from "../components/ui/orders/OrdersFeed"
+import Testimonials from "../components/ui/testimonials/Testimonials"
+import HowItWorks from "../components/ui/howItWorks/HowItWorks"
 
 const MainPage = () => {
   return (
-    <>
+    <div className="scroll-smooth">
       <Header />
 
       <div className="relative overflow-hidden" style={{ background: "linear-gradient(to bottom, #0a0a0a 0%, #0f0500 100%)" }}>
@@ -39,10 +43,14 @@ const MainPage = () => {
           </div>
 
           <Advantages />
+          <OrdersFeed />
+          <Testimonials />
+          <HowItWorks />
         </div>
       </div>
 
-    </>
+      <Footer />
+    </div>
   )
 }
 

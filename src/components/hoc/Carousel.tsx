@@ -46,7 +46,7 @@ const Carousel = ({ children, autoPlay = false, autoSlideInterval = 4000 }: Caro
         className="absolute left-3 top-1/2 -translate-y-1/2 z-10
                    w-10 h-10 flex items-center justify-center rounded-full
                    bg-orange-500/10 border border-orange-500/30
-                   text-orange-400 hover:bg-orange-500/25 transition-colors duration-200"
+                   text-orange-400 hover:bg-orange-500/25 transition-colors duration-200 "
       >
         <ChevronLeft size={20} />
       </button>
