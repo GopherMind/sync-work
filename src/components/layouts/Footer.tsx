@@ -86,7 +86,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="pt-8 border-t border-white/5">
           <p className="text-center text-gray-500 text-sm">
-            © 2026 Sync Work. Все права защищены.
+            © 2026 Sync Work. All rights reserved.
           </p>
         </div>
       </div>

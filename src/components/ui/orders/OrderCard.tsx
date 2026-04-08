@@ -64,7 +64,7 @@ const OrderCard = ({ order, index }: OrderCardProps) => {
             <span className="font-medium">{order.clientName}</span>
           </div>
           <div className="text-orange-400 font-bold text-lg tracking-tight">
-            {order.price.toLocaleString()} {order.currency === 'KGS' ? '⊆' : '$'}
+            ${order.price.toLocaleString()}
           </div>
         </div>
 

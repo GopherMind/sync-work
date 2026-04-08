@@ -4,20 +4,20 @@ import { FilePlus, Users, CheckCircle } from 'lucide-react'
 const steps = [
   {
     number: '01',
-    title: 'Размести задачу',
-    description: 'Опиши проект, бюджет и сроки. Это займет 2 минуты.',
+    title: 'Post a Task',
+    description: 'Describe your project, budget, and timeline. Takes just 2 minutes.',
     icon: FilePlus
   },
   {
     number: '02',
-    title: 'Выбери профи',
-    description: 'Получи предложения от проверенных специалистов. Выбери лучшего.',
+    title: 'Choose a Pro',
+    description: 'Get proposals from verified specialists. Pick the best one.',
     icon: Users
   },
   {
     number: '03',
-    title: 'Закрой сделку',
-    description: 'Работай через платформу. Оплата после результата.',
+    title: 'Close the Deal',
+    description: 'Work through the platform. Payment after results.',
     icon: CheckCircle
   }
 ]

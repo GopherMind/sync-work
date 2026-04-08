@@ -12,24 +12,24 @@ interface Testimonial {
 const testimonialsData: Testimonial[] = [
   {
     id: '1',
-    name: 'Айгерим Бекова',
+    name: 'Emily Rodriguez',
     role: 'Freelancer',
-    text: 'SyncWork изменил мою карьеру. Нашла 3 крупных проекта за первый месяц. Платформа интуитивная, оплата моментальная.',
-    avatar: 'AB'
+    text: 'SyncWork changed my career. Found 3 major projects in the first month. The platform is intuitive, payments are instant.',
+    avatar: 'ER'
   },
   {
     id: '2',
-    name: 'Марат Жумабаев',
+    name: 'Marcus Johnson',
     role: 'Client',
-    text: 'Искал Go-разработчика 2 недели на других платформах. Здесь нашел за 3 часа. Качество работы превзошло ожидания.',
-    avatar: 'MZ'
+    text: 'Searched for a Go developer for 2 weeks on other platforms. Found one here in 3 hours. Work quality exceeded expectations.',
+    avatar: 'MJ'
   },
   {
     id: '3',
-    name: 'Жанна Токтогулова',
+    name: 'Jessica Williams',
     role: 'Freelancer',
-    text: 'Работаю удаленно из Иссык-Куля. SyncWork дал доступ к международным проектам. Заработок вырос в 4 раза.',
-    avatar: 'ZT'
+    text: 'Working remotely from Colorado. SyncWork gave me access to international projects. Income increased 4x.',
+    avatar: 'JW'
   }
 ]
 

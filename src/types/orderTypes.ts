@@ -2,7 +2,7 @@ export interface Order {
   id: string
   title: string
   price: number
-  currency: 'KGS' | 'USD'
+  currency: 'USD'
   clientName: string
   stack: string[]
 }

@@ -46,7 +46,7 @@ const BubblesParticles = () => {
           onClick: { enable: false },
         },
         position: {
-          value: { x: 50, y: 50 }, // центр не обязателен, но можно оставить
+          value: { x: 50, y: 50 },
         },
         arrangement: {
           type: "grid",
@@ -67,7 +67,7 @@ const BubblesParticles = () => {
         rel="stylesheet"
       />
 
-      <div className="relative w-full overflow-hidden  h-[714px]">
+      <div className="relative w-full overflow-hidden h-[500px] sm:h-[600px] md:h-[650px] lg:h-[714px]">
 
     
 
@@ -87,16 +87,16 @@ const BubblesParticles = () => {
         )}
 
         <div
-          className="relative z-[2] flex flex-col items-center justify-center h-full px-6 text-center"
+          className="relative z-[2] flex flex-col items-center justify-center h-full px-4 sm:px-6 text-center"
           style={{ fontFamily: "'Outfit', sans-serif" }}
         >
-          <span className="inline-block text-[11px] font-semibold tracking-[3px] uppercase text-[#FF6A00] rounded-full px-[18px] py-[5px] mb-6 backdrop-blur-sm border border-[rgba(255,106,0,0.4)] bg-[rgba(255,106,0,0.07)]">
+          <span className="inline-block text-[9px] sm:text-[11px] font-semibold tracking-[2px] sm:tracking-[3px] uppercase text-[#FF6A00] rounded-full px-3 sm:px-[18px] py-[4px] sm:py-[5px] mb-4 sm:mb-6 backdrop-blur-sm border border-[rgba(255,106,0,0.4)] bg-[rgba(255,106,0,0.07)]">
             ✦ Online Freelance Platform
           </span>
 
           <h1
-            className="m-0 leading-[0.95] tracking-widest text-[#f0f0f0]"
-            style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(52px, 9vw, 96px)" }}
+            className="m-0 leading-[0.95] tracking-wide sm:tracking-widest text-[#f0f0f0] px-2"
+            style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px, 8vw, 96px)" }}
           >
             WORK SMARTER.
             <br />
@@ -111,8 +111,8 @@ const BubblesParticles = () => {
           </h1>
 
           <p
-            className="font-light text-[rgba(240,240,240,0.55)] max-w-[500px] leading-relaxed mt-[18px] mb-10 tracking-wide"
-            style={{ fontSize: "clamp(14px, 2vw, 17px)" }}
+            className="font-light text-[rgba(240,240,240,0.55)] max-w-[90%] sm:max-w-[500px] leading-relaxed mt-3 sm:mt-[18px] mb-6 sm:mb-10 tracking-wide px-2"
+            style={{ fontSize: "clamp(13px, 2vw, 17px)" }}
           >
             SyncWork connects top freelancers with ambitious projects —
             real-time collaboration, seamless contracts, and instant payments.
@@ -121,8 +121,8 @@ const BubblesParticles = () => {
 
           <button
             className="
-              inline-flex items-center gap-2.5 px-9 py-3.5
-              text-sm font-semibold tracking-widest uppercase
+              inline-flex items-center gap-2 sm:gap-2.5 px-6 sm:px-9 py-2.5 sm:py-3.5
+              text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase
               text-[#0a0a0a] rounded border-0 cursor-pointer
               transition-all duration-200 ease-in-out
               hover:-translate-y-0.5 active:translate-y-0
@@ -132,14 +132,15 @@ const BubblesParticles = () => {
             style={{ background: "linear-gradient(135deg, #FF6A00 0%, #FF3D00 100%)" }}
           >
             <svg
-              width="16"
-              height="16"
+              width="14"
+              height="14"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
+              className="sm:w-4 sm:h-4"
             >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>

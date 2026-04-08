@@ -10,6 +10,7 @@ interface CarouselProps {
 
 const Carousel = ({ children, autoPlay = false, autoSlideInterval = 4000 }: CarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isHovered, setIsHovered] = useState(false)
   const total = children.length
 
   const handlePrev = useCallback(
@@ -23,13 +24,17 @@ const Carousel = ({ children, autoPlay = false, autoSlideInterval = 4000 }: Caro
   )
 
   useEffect(() => {
-    if (!autoPlay) return
+    if (!autoPlay || isHovered) return
     const id = setInterval(handleNext, autoSlideInterval)
     return () => clearInterval(id)
-  }, [handleNext, autoPlay, autoSlideInterval])
+  }, [handleNext, autoPlay, autoSlideInterval, isHovered])
 
   return (
-    <div className="relative w-full overflow-hidden">
+    <div
+      className="relative w-full overflow-hidden"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div
         className="flex transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
