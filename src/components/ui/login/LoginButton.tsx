@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 
-interface SubmitButtonProps {
-  role: 'freelancer' | 'client';
+interface LoginButtonProps {
   isLoading?: boolean;
 }
 
-const SubmitButton = ({ role, isLoading = false }: SubmitButtonProps) => {
+const LoginButton = ({ isLoading = false }: LoginButtonProps) => {
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -54,11 +53,11 @@ const SubmitButton = ({ role, isLoading = false }: SubmitButtonProps) => {
 
         <span className="relative z-10 flex items-center justify-center gap-2">
           {isLoading && <Loader2 className="w-5 h-5 animate-spin" />}
-          {isLoading ? 'Creating Account...' : `Create Account as ${role === 'freelancer' ? 'Freelancer' : 'Client'}`}
+          {isLoading ? 'Signing in...' : 'Sign In'}
         </span>
       </motion.button>
     </motion.div>
   );
 };
 
-export default SubmitButton;
+export default LoginButton;

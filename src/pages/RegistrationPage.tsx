@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Lock, User } from 'lucide-react';
+import { toast } from 'sonner';
 import BackgroundEffects from '../components/ui/registration/BackgroundEffects';
 import RegistrationCard from '../components/ui/registration/RegistrationCard';
 import RoleSelector from '../components/ui/registration/RoleSelector';
@@ -8,7 +9,14 @@ import FormInput from '../components/ui/registration/FormInput';
 import SubmitButton from '../components/ui/registration/SubmitButton';
 import api from '../api/api';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 type UserRole = 'freelancer' | 'client';
+
+interface ApiError {
+  error: string;
+  message: string;
+}
 
 const RegistrationPage = () => {
   const [role, setRole] = useState<UserRole>('freelancer');
@@ -17,18 +25,76 @@ const RegistrationPage = () => {
     email: '',
     password: '',
   });
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user is already logged in
+    const token = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('token='))
+      ?.split('=')[1];
+
+    if (token) {
+      navigate('/');
+    }
+  }, [navigate]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+
     try {
-      const resp = await api.post('/auth/login', { ...formData, role });
+      const resp = await api.post('/auth/register', { ...formData, role });
 
       if (resp.status === 201) {
-        document.cookie = `token=${resp.data.token}; path=/; max-age=31536000`; // Сохранение токена в cookie
+        document.cookie = `token=${resp.data.token}; path=/; max-age=31536000`;
+        toast.success('Registration successful! Welcome aboard!');
         navigate('/');
       }
     } catch (error) {
-      console.error('Registration failed:', error);
+      if (axios.isAxiosError(error) && error.response) {
+        const apiError = error.response.data as ApiError;
+
+        switch (apiError.error) {
+          case 'EMAIL_REQUIRED':
+            toast.error('Email is required');
+            break;
+          case 'PASSWORD_REQUIRED':
+            toast.error('Password is required');
+            break;
+          case 'PASSWORD_TOO_SHORT':
+            toast.error('Password must be at least 6 characters');
+            break;
+          case 'NAME_REQUIRED':
+            toast.error('Name is required');
+            break;
+          case 'ROLE_REQUIRED':
+            toast.error('Role is required');
+            break;
+          case 'INVALID_ROLE':
+            toast.error('Role must be "freelancer" or "client"');
+            break;
+          case 'SIGNUP_FAILED':
+            toast.error('Email already exists. Try logging in instead.');
+            break;
+          case 'PROFILE_CREATION_FAILED':
+            toast.error('Registration failed. Please contact support.');
+            break;
+          case 'TOKEN_GENERATION_FAILED':
+            toast.error('Registration successful. Please try logging in.');
+            break;
+          case 'INVALID_REQUEST_BODY':
+            toast.error('Invalid data format. Please check your input.');
+            break;
+          default:
+            toast.error(apiError.message || 'Registration failed. Please try again.');
+        }
+      } else {
+        toast.error('Network error. Please check your connection.');
+      }
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -91,7 +157,7 @@ const RegistrationPage = () => {
             required
           />
 
-          <SubmitButton role={role} />
+          <SubmitButton role={role} isLoading={isLoading} />
         </form>
 
         {/* Footer */}
@@ -99,7 +165,7 @@ const RegistrationPage = () => {
           <p className="text-zinc-500 text-sm">
             Already have an account?{' '}
             <a
-              href="#"
+              href="/signin"
               className="text-orange-500 hover:text-orange-400 font-semibold transition-colors"
             >
               Sign in

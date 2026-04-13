@@ -21,7 +21,7 @@ const Header = () => {
       navigate('/');
       return 0
     }else{
-      navigate('/login');
+      navigate('/signup');
     }
   }
   return (

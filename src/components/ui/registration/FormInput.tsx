@@ -46,9 +46,10 @@ const FormInput = ({
             type={type}
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className="w-full bg-zinc-800/80 border border-zinc-700 rounded-xl py-3 pl-12 pr-4 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300"
+            className="w-full bg-zinc-800/80 border border-zinc-700 rounded-xl py-3 pl-12 pr-4 text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300 [&:-webkit-autofill]:[-webkit-text-fill-color:white] [&:-webkit-autofill]:[-webkit-box-shadow:0_0_0_1000px_rgb(39_39_42_/_0.8)_inset] [&:-webkit-autofill]:border-orange-500"
             placeholder={placeholder}
             required={required}
+            autoComplete="off"
           />
         </div>
       </div>
