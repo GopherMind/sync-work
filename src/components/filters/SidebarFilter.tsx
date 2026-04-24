@@ -38,15 +38,15 @@ const SidebarFilter = () => {
   };
 
   return (
-    <aside className="w-80 min-h-screen bg-[#1a1a1a] border-r border-white/5 flex flex-col sticky top-0">
-      <div className="p-6 border-b border-white/5">
+    <aside className="w-full lg:w-80 lg:min-h-screen bg-[#1a1a1a] lg:border-r border-white/5 flex flex-col lg:sticky lg:top-0">
+      <div className="hidden lg:block p-6 border-b border-white/5">
         <div className="flex items-center gap-3">
           <SlidersHorizontal className="w-5 h-5 text-orange-400" />
           <h2 className="text-lg font-semibold text-white">Filters</h2>
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-6 space-y-6">
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
         <div className="space-y-2">
           <label className="text-sm font-medium text-gray-300">Search</label>
           <div className="relative">

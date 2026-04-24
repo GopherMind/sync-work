@@ -11,4 +11,8 @@ export interface Order {
   profiles: {
     name: string;
   };
+  proposals?: number;
+  level?: string;
+  work_time_in_week?: number;
+  duration?: string;
 }

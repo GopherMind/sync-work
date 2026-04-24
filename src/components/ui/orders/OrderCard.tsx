@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { User, Code2, Database, Palette, Cpu, Cloud, Zap } from 'lucide-react'
 import type { Order } from '../../../types/orderTypes'
-
+import { useNavigate } from 'react-router-dom'
 interface OrderCardProps {
   order: Order
   index: number
@@ -33,8 +33,10 @@ const techIcons: Record<string, any> = {
 }
 
 const OrderCard = ({ order, index }: OrderCardProps) => {
+  const navigate = useNavigate()
   return (
     <motion.div
+      onClick={() => navigate(`/order/${order.id}`)}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
