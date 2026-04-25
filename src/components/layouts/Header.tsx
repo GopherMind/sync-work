@@ -1,12 +1,28 @@
-import { Menu, X, Zap, MessageSquare, Briefcase, LayoutDashboard } from 'lucide-react';
-import { useState } from 'react';
+import { Menu, X, Zap, MessageSquare, Briefcase, LayoutDashboard, User } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = document.cookie.split('; ').find(row => row.startsWith('token='));
+      setIsAuthenticated(!!token);
+    };
+
+    checkAuth();
+
+    window.addEventListener('popstate', checkAuth);
+
+    return () => {
+      window.removeEventListener('popstate', checkAuth);
+    };
+  }, [location]);
 
   const navItems = [
     { name: 'Chats', icon: MessageSquare, path: '/chats' },
@@ -15,11 +31,10 @@ const Header = () => {
   ];
 
   const isActive = (path: string) => location.pathname === path;
-  const isRegist = ()=>{
+  const handleAuthClick = ()=>{
     const jwt = document.cookie.split('; ').find(row => row.startsWith('token='));
     if (!!jwt) {
-      navigate('/');
-      return 0
+      navigate('/profile');
     }else{
       navigate('/signup');
     }
@@ -90,20 +105,39 @@ const Header = () => {
             })}
           </nav>
 
-          <motion.button
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="hidden md:block relative px-6 py-2.5 bg-gradient-to-r from-orange-500 to-amber-600 text-white font-semibold rounded-lg overflow-hidden group"
-            onClick={isRegist}  
-          >
-            <span className="relative z-10">Get Started</span>
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            />
-          </motion.button>
+          {isAuthenticated ? (
+            <Link to="/profile">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-orange-500 to-amber-600 text-white font-semibold rounded-lg overflow-hidden group relative"
+              >
+                <User className="w-5 h-5 relative z-10" />
+                <span className="relative z-10">Profile</span>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                />
+              </motion.div>
+            </Link>
+          ) : (
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="hidden md:block relative px-6 py-2.5 bg-gradient-to-r from-orange-500 to-amber-600 text-white font-semibold rounded-lg overflow-hidden group"
+              onClick={handleAuthClick}
+            >
+              <span className="relative z-10">Get Started</span>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              />
+            </motion.button>
+          )}
 
           <motion.button
             whileTap={{ scale: 0.9 }}
@@ -147,14 +181,29 @@ const Header = () => {
                   </Link>
                 );
               })}
-              <motion.button
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 }}
-                className="w-full px-6 py-2.5 bg-gradient-to-r from-orange-500 to-amber-600 text-white font-semibold rounded-lg mt-2"
-              >
-                Get Started
-              </motion.button>
+              {isAuthenticated ? (
+                <Link to="/profile" onClick={() => setIsMenuOpen(false)}>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="w-full px-6 py-2.5 bg-gradient-to-r from-orange-500 to-amber-600 text-white font-semibold rounded-lg mt-2 flex items-center justify-center gap-2"
+                  >
+                    <User className="w-5 h-5" />
+                    <span>Profile</span>
+                  </motion.div>
+                </Link>
+              ) : (
+                <motion.button
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="w-full px-6 py-2.5 bg-gradient-to-r from-orange-500 to-amber-600 text-white font-semibold rounded-lg mt-2"
+                  onClick={handleAuthClick}
+                >
+                  Get Started
+                </motion.button>
+              )}
             </div>
           </motion.div>
         )}
