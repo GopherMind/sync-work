@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, FileText, Plus } from 'lucide-react';
+import { Briefcase, FileText, Plus, Users } from 'lucide-react';
 import Header from '../components/layouts/Header';
 import Footer from '../components/layouts/Footer';
 import ProfileHeader from '../components/ui/profile/ProfileHeader';
 import StatsCards from '../components/ui/profile/StatsCards';
 import ProposalCard from '../components/ui/profile/ProposalCard';
 import TaskCard from '../components/ui/profile/TaskCard';
+import TaskProposals from '../components/ui/profile/TaskProposals';
 import CreateTaskModal from '../components/ui/profile/CreateTaskModal';
 import axiosInstance from '../api/api';
 import type { ProfileData } from '../types/profileTypes';
@@ -14,7 +15,7 @@ import type { ProfileData } from '../types/profileTypes';
 const ProfilePage = () => {
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'proposals' | 'tasks'>('proposals');
+  const [activeTab, setActiveTab] = useState<'proposals' | 'tasks' | 'task-proposals'>('proposals');
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const fetchProfile = async () => {
@@ -100,6 +101,17 @@ const ProfilePage = () => {
               >
                 My Tasks ({tasks.length})
               </button>
+              <button
+                onClick={() => setActiveTab('task-proposals')}
+                className={`px-6 py-3 font-medium transition-all flex items-center gap-2 ${
+                  activeTab === 'task-proposals'
+                    ? 'text-orange-400 border-b-2 border-orange-400'
+                    : 'text-gray-400 hover:text-gray-300'
+                }`}
+              >
+                <Users className="w-4 h-4" />
+                Task Proposals
+              </button>
             </div>
 
             <motion.button
@@ -127,7 +139,7 @@ const ProfilePage = () => {
                 </div>
               )}
             </div>
-          ) : (
+          ) : activeTab === 'tasks' ? (
             <div className="grid gap-4">
               {tasks.length > 0 ? (
                 tasks.map((task, index) => (
@@ -146,6 +158,8 @@ const ProfilePage = () => {
                 </div>
               )}
             </div>
+          ) : (
+            <TaskProposals />
           )}
         </div>
       </main>
