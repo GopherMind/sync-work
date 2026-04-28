@@ -25,9 +25,9 @@ const Header = () => {
   }, [location]);
 
   const navItems = [
-    { name: 'Chats', icon: MessageSquare, path: '/chats' },
-    { name: 'Works', icon: Briefcase, path: '/works' },
-    { name: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
+    { name: 'Chats', icon: MessageSquare, path: '/chats', authRequired: true },
+    { name: 'Works', icon: Briefcase, path: '/works', authRequired: false },
+    { name: 'Dashboard', icon: LayoutDashboard, path: '/dashboard', authRequired: false },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -73,36 +73,38 @@ const Header = () => {
           </Link>
 
           <nav className="hidden md:flex items-center gap-2">
-            {navItems.map((item, index) => {
-              const Icon = item.icon;
-              const active = isActive(item.path);
-              return (
-                <Link key={item.name} to={item.path}>
-                  <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 + 0.3 }}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 font-medium relative group ${
-                      active 
-                        ? 'text-orange-400 bg-orange-500/10' 
-                        : 'text-gray-300 hover:text-orange-400 hover:bg-orange-500/10'
-                    }`}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Icon className="w-5 h-5" />
-                    <span>{item.name}</span>
-                    {active && (
-                      <motion.div
-                        layoutId="activeTab"
-                        className="absolute inset-0 border border-orange-500/50 rounded-lg"
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                      />
-                    )}
-                  </motion.div>
-                </Link>
-              );
-            })}
+            {navItems
+              .filter(item => !item.authRequired || isAuthenticated)
+              .map((item, index) => {
+                const Icon = item.icon;
+                const active = isActive(item.path);
+                return (
+                  <Link key={item.name} to={item.path}>
+                    <motion.div
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 + 0.3 }}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 font-medium relative group ${
+                        active
+                          ? 'text-orange-400 bg-orange-500/10'
+                          : 'text-gray-300 hover:text-orange-400 hover:bg-orange-500/10'
+                      }`}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Icon className="w-5 h-5" />
+                      <span>{item.name}</span>
+                      {active && (
+                        <motion.div
+                          layoutId="activeTab"
+                          className="absolute inset-0 border border-orange-500/50 rounded-lg"
+                          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                        />
+                      )}
+                    </motion.div>
+                  </Link>
+                );
+              })}
           </nav>
 
           {isAuthenticated ? (
@@ -160,27 +162,29 @@ const Header = () => {
             className="md:hidden bg-[#1a1818] border-t border-orange-500/20"
           >
             <div className="px-4 py-6 space-y-3">
-              {navItems.map((item, index) => {
-                const Icon = item.icon;
-                const active = isActive(item.path);
-                return (
-                  <Link key={item.name} to={item.path} onClick={() => setIsMenuOpen(false)}>
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className={`flex items-center gap-3 transition-colors duration-300 font-medium py-3 px-4 rounded-lg ${
-                        active 
-                          ? 'text-orange-400 bg-orange-500/10' 
-                          : 'text-gray-300 hover:text-orange-400 hover:bg-orange-500/10'
-                      }`}
-                    >
-                      <Icon className="w-5 h-5" />
-                      <span>{item.name}</span>
-                    </motion.div>
-                  </Link>
-                );
-              })}
+              {navItems
+                .filter(item => !item.authRequired || isAuthenticated)
+                .map((item, index) => {
+                  const Icon = item.icon;
+                  const active = isActive(item.path);
+                  return (
+                    <Link key={item.name} to={item.path} onClick={() => setIsMenuOpen(false)}>
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        className={`flex items-center gap-3 transition-colors duration-300 font-medium py-3 px-4 rounded-lg ${
+                          active
+                            ? 'text-orange-400 bg-orange-500/10'
+                            : 'text-gray-300 hover:text-orange-400 hover:bg-orange-500/10'
+                        }`}
+                      >
+                        <Icon className="w-5 h-5" />
+                        <span>{item.name}</span>
+                      </motion.div>
+                    </Link>
+                  );
+                })}
               {isAuthenticated ? (
                 <Link to="/profile" onClick={() => setIsMenuOpen(false)}>
                   <motion.div
